@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  web:
+    image: httpd:2.4
+    container_name: apache-http
+    ports:
+      - "48080:80"
+    volumes:
+      - ./infra/apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+    networks:
+      - work_network
+
+  app:
+    image: tomcat:9.0
+    container_name: apcache-tomcat
+    environment:
+      - CATALINA_OPTS=-Dajp.port=8009
+    volumes:
+      - ./infra/tomcat/conf/server.xml:/usr/local/tomcat/conf/server.xml
+    networks:
+      - work_network
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "43306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: appdb
+      MYSQL_USER: appuser
+      MYSQL_PASSWORD: apppassword
+    networks:
+      - work_network
+
+networks:
+  work_network:
+    driver: bridge
