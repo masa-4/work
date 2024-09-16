@@ -7,5 +7,7 @@ CREATE TABLE IF NOT EXISTS student (
   login_id VARCHAR(255) UNIQUE NOT NULL COMMENT 'ログインID',
   class_id INT(10) UNSIGNED NOT NULL COMMENT 'クラスID',
   class_name VARCHAR(255) NOT NULL COMMENT 'クラス名',
+  created_at DATETIME NOT NULL COMMENT '作成日時',
+  updated_at DATETIME NOT NULL COMMENT '更新日時', 
   PRIMARY KEY (student_id)
 );
