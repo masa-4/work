@@ -1,0 +1,11 @@
+USE schooldb;
+
+CREATE TABLE IF NOT EXISTS student (
+  teacher_id INT(10) UNSIGNED NOT NULL COMMENT '教師ID',
+  student_id INT(10) UNSIGNED AUTO_INCREMENT NOT NULL COMMENT '生徒ID',
+  student_name VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '生徒名',
+  login_id VARCHAR(255) UNIQUE NOT NULL COMMENT 'ログインID',
+  class_id INT(10) UNSIGNED NOT NULL COMMENT 'クラスID',
+  class_name VARCHAR(255) NOT NULL COMMENT 'クラス名',
+  PRIMARY KEY (student_id)
+);

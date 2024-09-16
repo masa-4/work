@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  web:
+  school-web:
     image: httpd:2.4
     container_name: apache-http
     ports:
@@ -11,7 +11,7 @@ services:
     networks:
       - work_network
 
-  app:
+  school-app:
     image: tomcat:9.0
     container_name: apcache-tomcat
     environment:
@@ -21,18 +21,23 @@ services:
     networks:
       - work_network
 
-  db:
+  school-db:
     image: mysql:8.0
     container_name: mysql-db
     ports:
       - "43306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: appdb
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: apppassword
+      MYSQL_ROOT_PASSWORD: fE3SzFrcztj
+      MYSQL_DATABASE: schooldb
+      MYSQL_USER: portal_user
+      MYSQL_PASSWORD: Hw6GPb8R
+      TZ: 'Asia/Tokyo'
     networks:
       - work_network
+    volumes:
+        - ./infra/mysql/data:/var/lib/mysql
+        - ./infra/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
+        - ./infra/mysql/script:/docker-entrypoint-initdb.d 
 
 networks:
   work_network:
