@@ -1,11 +1,12 @@
 package jp.school.portal.domain.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import jp.school.portal.domain.entity.Student;
 
 @Repository
-public interface StudentRepositoryInterfase extends JpaRepository<Student, Long> {
-  
+public interface StudentRepositoryInterfase extends JpaRepository<Student, Long>,  JpaSpecificationExecutor<Student>{
 }
