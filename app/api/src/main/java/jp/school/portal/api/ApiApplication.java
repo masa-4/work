@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import jakarta.annotation.PostConstruct;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "jp.school.portal.domain")
+@ComponentScan(basePackages = {"jp.school.portal.domain", "jp.school.portal.api"})
 public class ApiApplication {
 
 	public static void main(String[] args) {
@@ -19,8 +19,7 @@ public class ApiApplication {
 	// アプリケーション起動時にJSTを設定
 	@PostConstruct
 	public void init() {
-			// タイムゾーンをJST（日本標準時）に設定
-			TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
+		// タイムゾーンをJST（日本標準時）に設定
+		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Tokyo"));
 	}
-
 }
