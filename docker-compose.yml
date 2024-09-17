@@ -8,18 +8,23 @@ services:
       - "48080:80"
     volumes:
       - ./infra/apache/conf/httpd.conf:/usr/local/apache2/conf/httpd.conf
+      - ./infra/apache/extra/httpd-ssl.conf:/usr/local/apache2/extra/httpd-ssl.conf
     networks:
-      - work_network
+      - work
 
   school-app:
-    image: tomcat:9.0
+    image: tomcat:10.1
     container_name: apcache-tomcat
     environment:
       - CATALINA_OPTS=-Dajp.port=8009
     volumes:
-      - ./infra/tomcat/conf/server.xml:/usr/local/tomcat/conf/server.xml
+        - ./infra/tomcat/webapps:/usr/local/tomcat/webapps
+        - ./infra/tomcat/conf/logging.properties:/usr/local/tomcat/conf/logging.properties
+        - ./infra/tomcat/conf/server.xml:/usr/local/tomcat/conf/server.xml
+    ports:
+      - "8009:8009"
     networks:
-      - work_network
+      - work
 
   school-db:
     image: mysql:8.0
@@ -33,12 +38,12 @@ services:
       MYSQL_PASSWORD: Hw6GPb8R
       TZ: 'Asia/Tokyo'
     networks:
-      - work_network
+      - work
     volumes:
         - ./infra/mysql/data:/var/lib/mysql
         - ./infra/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf
         - ./infra/mysql/script:/docker-entrypoint-initdb.d 
 
 networks:
-  work_network:
+  work:
     driver: bridge
