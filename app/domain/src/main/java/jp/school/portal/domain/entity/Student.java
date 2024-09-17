@@ -23,7 +23,7 @@ import lombok.Setter;
 @EntityListeners(AuditingEntityListener.class)
 public class Student {
   @Column(name = "teacher_id")
-  private Long teachId;
+  private Long teacherId;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
